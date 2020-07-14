@@ -40,6 +40,7 @@ import static com.onesignal.OneSignalPackagePrivateHelper.OSNotificationFormatHe
 import static com.onesignal.OneSignalPackagePrivateHelper.OSNotificationFormatHelper.PAYLOAD_OS_NOTIFICATION_ID;
 import static com.onesignal.OneSignalPackagePrivateHelper.GenerateNotification.BUNDLE_KEY_ACTION_ID;
 import static com.onesignal.InAppMessagingHelpers.ONESIGNAL_APP_ID;
+import static com.onesignal.ShadowOneSignalRestClient.setRemoteParamsGetHtmlResponse;
 import static com.test.onesignal.RestClientAsserts.assertNotificationOpenAtIndex;
 import static com.test.onesignal.TestHelpers.fastColdRestartApp;
 import static com.test.onesignal.TestHelpers.threadAndTaskWait;
@@ -76,6 +77,8 @@ public class NotificationOpenedActivityHMSIntegrationTestsRunner {
     public void beforeEachTest() throws Exception {
         TestHelpers.beforeTestInitAndCleanup();
         ShadowOSUtils.supportsHMS(true);
+        // Set remote_params GET response
+        setRemoteParamsGetHtmlResponse();
     }
 
     private static @NonNull Intent helper_baseHMSOpenIntent() {

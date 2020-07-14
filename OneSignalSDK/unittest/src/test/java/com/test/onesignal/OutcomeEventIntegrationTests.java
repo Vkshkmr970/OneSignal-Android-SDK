@@ -54,6 +54,7 @@ import static com.onesignal.OneSignalPackagePrivateHelper.OneSignal_getSessionLi
 import static com.onesignal.OneSignalPackagePrivateHelper.OneSignal_setSessionManager;
 import static com.onesignal.OneSignalPackagePrivateHelper.OneSignal_setSharedPreferences;
 import static com.onesignal.OneSignalPackagePrivateHelper.OneSignal_setTrackerFactory;
+import static com.onesignal.ShadowOneSignalRestClient.setRemoteParamsGetHtmlResponse;
 import static com.test.onesignal.GenerateNotificationRunner.getBaseNotifBundle;
 import static com.test.onesignal.RestClientAsserts.assertMeasureAtIndex;
 import static com.test.onesignal.RestClientAsserts.assertMeasureOnV2AtIndex;
@@ -135,6 +136,8 @@ public class OutcomeEventIntegrationTests {
         notificationOpenedMessage = null;
 
         TestHelpers.beforeTestInitAndCleanup();
+        // Set remote_params GET response
+        setRemoteParamsGetHtmlResponse();
     }
 
     @Before
@@ -1088,8 +1091,6 @@ public class OutcomeEventIntegrationTests {
         OneSignal.setAppContext(blankActivity);
         OneSignal.setNotificationOpenedHandler(notificationOpenedHandler);
         threadAndTaskWait();
-        // Enable influence
-        trackerFactory.saveInfluenceParams(new OneSignalPackagePrivateHelper.RemoteOutcomeParams());
         blankActivityController.resume();
     }
 }
